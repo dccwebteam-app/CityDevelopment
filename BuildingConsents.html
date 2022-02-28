@@ -82,7 +82,8 @@
           "esri/widgets/TimeSlider",
           "esri/core/watchUtils",
           "esri/core/promiseUtils",
-          "esri/widgets/BasemapGallery"
+          "esri/widgets/BasemapGallery",
+          "esri/widgets/Fullscreen"
         ], function(
           Map,
           MapView,
@@ -92,7 +93,8 @@
           TimeSlider,
           watchUtils,
           promiseUtils,
-          BasemapGallery
+          BasemapGallery,
+           Fullscreen
         ) {
           //        let timeSlider;
           
@@ -182,12 +184,27 @@
 			view: view
 			});
           
+        legendExpand = new Expand({
+			view: view,
+			expandIconClass: "esri-icon-legend",
+			content: legend,
+      expanded: true
+			}); 
+          
+       const fullscreen = new Fullscreen({
+  view: view
+});
+          
         view.ui.add([{
-            component: legend,
+            component: legendExpand,
             position: "top-right",
 			index: 0},
                       {
             component:    basemapGalleryExpand,
+            position: "top-left",
+			index: 1},
+                      {
+            component:    fullscreen,
             position: "top-left",
 			index: 1}
                    
