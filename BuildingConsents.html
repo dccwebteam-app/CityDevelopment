@@ -15,6 +15,31 @@
           height: 100%;
           width: 100%;
         }
+        
+             .docking-control {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        width: 250px;
+        height: 80px;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: -40px 0 0 -125px;
+        background-color: #fff;
+        color: #323232;
+        text-align: center;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .docking-control label {
+        display: inline-block;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+        padding: 0;
+        font-size: 16px;
+      }
       </style>
       
       <link
@@ -90,6 +115,16 @@
           
           var view = new MapView({
             map: map,
+          popup: {
+            dockEnabled: true,
+            dockOptions: {
+              // Disables the dock button from the popup
+              buttonEnabled: false,
+              // Ignore the default sizes that trigger responsive docking
+              breakpoint: false,
+            position: "top-left"
+            },
+          },            
             container: "viewDiv",
             center: [170.503565668, -45.874113859],
             zoom: 11,
@@ -146,7 +181,7 @@
         const legend = new Legend({
 			view: view
 			});
-       
+          
         view.ui.add([{
             component: legend,
             position: "top-right",
@@ -154,10 +189,14 @@
                       {
             component:    basemapGalleryExpand,
             position: "top-left",
-			index: 1}]);
+			index: 1}
+                   
+                  
+                    ]
+                );  
 
         });
-   
+
       </script>
       
       </head>
