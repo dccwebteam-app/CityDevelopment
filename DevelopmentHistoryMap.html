@@ -113,26 +113,36 @@
 
 //        view.ui.empty("top-left");
         view.ui.add(titleDiv, "top-right");
-        view.ui.add(
-          new Home({
+        view.ui.add([
+          {
+          component: new Home({
             view: view
           }),
-          "top-left"
-        );
-         view.ui.add(
-          new Legend({
+          position:"top-left",
+          index:1
+        },
+         {
+          component: new Legend({
             view: view
           }),
-          "bottom-right"
-        ); 
-        view.ui.add(
-          new Fullscreen({
+          position:"bottom-right",
+          index:0
+        },
+         {
+          component: new Fullscreen({
             view: view,
             element: applicationDiv
           }),
-          "top-left"
-        );
+          position:"top-left",
+          index:0
+        }
+          ]);
         
+     
+        view.ui.move([{
+            component: "zoom",
+            position: "top-left",
+            index: 2}]);
         
         // When the layerview is available, setup hovering interactivity
         view.whenLayerView(layer).then(setupHoverTooltip);
