@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/dark/main.css" />
     <script src="https://js.arcgis.com/4.19/"></script>
 
-	  
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FYN1LYTKKN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FYN1LYTKKN');
+</script>	
+    
     <script>
       require([
         "esri/Map",
@@ -134,17 +143,24 @@
 //        view.ui.empty("top-left");
         view.ui.add(titleDiv, "top-right");
         view.ui.add([
+           {
+          component: new Home({
+  view: view
+}),
+          position:"top-left",
+          index: 1
+        },
           {
           component: basemapGalleryExpand,
           position:"top-left",
-          index:1
+          index: 2
         },
          {
           component: new Legend({
             view: view
           }),
           position:"bottom-right",
-          index:0
+          index: 0
         },
          {
           component: new Fullscreen({
@@ -152,12 +168,12 @@
             element: applicationDiv
           }),
           position:"top-left",
-          index:0
+          index: 0
         },
          {
           component: TextExpand,
           position:"top-left",
-          index:3
+          index: 4
         }
           ]);
         
@@ -165,7 +181,7 @@
         view.ui.move([{
             component: "zoom",
             position: "top-left",
-            index: 1}]);
+            index: 2}]);
         
         
         
