@@ -47,16 +47,7 @@
         href="https://js.arcgis.com/4.22/esri/themes/dark/main.css"
         />
       <script src="https://js.arcgis.com/4.22/"></script>
-  
-	  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FYN1LYTKKN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FYN1LYTKKN');
-</script>	
+ 
 	
 	
       <style>
@@ -155,18 +146,7 @@
             playRate: 200
           });
           
-          
-          view.ui.add([{
-            component: "titleDiv",
-            position: "top-left",
-            index: 0}])
-          
-        view.ui.move([{
-            component: "zoom",
-            position: "top-left",
-            index: 1}]);
-          
-          view.whenLayerView(layer).then((lv) => {
+                   view.whenLayerView(layer).then((lv) => {
            timeSlider.fullTimeExtent = layer.timeInfo.fullTimeExtent.expandTo("months");
             timeSlider.stops = {
               interval: {
@@ -182,13 +162,14 @@
           
         const basemapGallery = new BasemapGallery({
 			view: view,
-			container: "BasemapDiv",
+			container: "BasemapDiv"
 			});
           
         basemapGalleryExpand = new Expand({
 			view: view,
 			expandIconClass: "esri-icon-basemap",
-			content: basemapGallery           
+			content: basemapGallery,
+      expandTooltip: "Basemaps"           
 			}); 
             
         const legend = new Legend({
@@ -199,30 +180,60 @@
 			view: view,
 			expandIconClass: "esri-icon-legend",
 			content: legend,
-      expanded: true
+//      expanded: true,
+      expandTooltip: "Legend"
 			}); 
           
        const fullscreen = new Fullscreen({
   view: view
 });
+
+
+ var MapInfoContent = 'This map shows the location, type, and quantity of new homes consented since January 2013.\n \n The default view is for 2020-21, however this can be changed or extended using the time bar at the bottom of the screen.\n \n Definitions of each dwelling type are available also <a href="https://datainfoplus.stats.govt.nz/item/nz.govt.stats/a1d9b0d0-4cbf-4cce-b905-ce6c2e86eff4?_ga=2.47299310.813614567.1645660765-276142531.1566764892&_gac=1.118906363.1645484433.Cj0KCQiAjc2QBhDgARIsAMc3SqSJH_z7q75ahY0TgIuIWXKM245IHJ8lkTpN5UsfdGTqo3lLIsN_s4gaAtNuEALw_wcB" target="_blank">here</a>'; 
+               
+     
+  var TextExpand = new Expand({
+    view: view,
+    expandIconClass: "esri-icon-description",
+      Title: "Map information",
+      expandTooltip: "Map information",
+        content: MapInfoContent
+//        content: "Test"
+    
+  });
+    
+            
           
         view.ui.add([{
             component: legendExpand,
-            position: "top-right",
-			index: 0},
+            position: "top-left",
+			index: 2},
                       {
             component:    basemapGalleryExpand,
             position: "top-left",
-			index: 1},
+			index: 3},
                       {
             component:    fullscreen,
             position: "top-left",
-			index: 1}
-                   
-                  
+			index: 1},
+                      {
+            component:    TextExpand,
+            position: "top-left",
+			index: 4} 
                     ]
                 );  
 
+          view.ui.add([{
+            component: "titleDiv",
+            position: "top-left",
+            index: 0}])
+          
+        view.ui.move([{
+            component: "zoom",
+            position: "top-left",
+            index: 2}]);
+                   
+          
         });
 
       </script>
@@ -237,7 +248,11 @@
   gtag('config', 'G-JDZ0N5N8N2');
 </script>
 	
-	
+<style> div[class="esri-expand__content esri-expand__content--expanded"]{
+ width: 500px;
+}
+</style>    
+  
       </head>
     
     <body>
