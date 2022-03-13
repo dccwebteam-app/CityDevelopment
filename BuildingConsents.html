@@ -89,6 +89,7 @@
           "esri/views/MapView",
           "esri/layers/FeatureLayer",
           "esri/widgets/Legend",
+          "esri/widgets/Home",
           "esri/widgets/Expand",
           "esri/widgets/TimeSlider",
           "esri/core/watchUtils",
@@ -100,6 +101,7 @@
           MapView,
           FeatureLayer,
           Legend,
+          Home,
           Expand,
           TimeSlider,
           watchUtils,
@@ -213,22 +215,29 @@
     
             
           
-        view.ui.add([{
-            component: legendExpand,
-            position: "top-left",
-			index: 2},
-                      {
-            component:    basemapGalleryExpand,
-            position: "top-left",
-			index: 3},
-                      {
+        view.ui.add([
+                       {
             component:    fullscreen,
             position: "top-left",
 			index: 1},
+          {
+            component: new Home({
+           view: view
+          }),
+            position: "top-left",
+			index: 2},
+          {
+            component: legendExpand,
+            position: "top-left",
+			index: 3},
                       {
+            component:    basemapGalleryExpand,
+            position: "top-left",
+			index: 4},
+          {
             component:    TextExpand,
             position: "top-left",
-			index: 4} 
+			index: 5} 
                     ]
                 );  
 
@@ -240,7 +249,7 @@
         view.ui.move([{
             component: "zoom",
             position: "top-left",
-            index: 2}]);
+            index: 3}]);
                    
           
         });
