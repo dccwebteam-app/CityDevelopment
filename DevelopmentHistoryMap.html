@@ -7,15 +7,6 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/dark/main.css" />
     <script src="https://js.arcgis.com/4.19/"></script>
 
-	  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FYN1LYTKKN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FYN1LYTKKN');
-</script>	
 	  
     <script>
       require([
@@ -121,10 +112,23 @@
         basemapGalleryExpand = new Expand({
 			view: view,
 			expandIconClass: "esri-icon-basemap",
-			content: basemapGallery           
+			content: basemapGallery,
+      expandTooltip: "Basemaps"
+          
 			});           
 
-                    
+ var MapInfoContent = 'This map was created to look at how Dunedin has grown. It is an adaptation of one showing New York’s construction history.<br>The data comes from the DCC’s rating database but is not 100% accurate or comprehensive. It is based on buildings that are still standing, so is likely to underestimate the number of early buildings. It also overlooks the pre-European history, which does not come through in this data. However, it still provides a useful rough history of Dunedin’s built form. For example, it shows the expansion of Mosgiel from the late 1950s and the sudden development of Halfway Bush in the 1950s and Brockville in the 1960s.'; 
+               
+     
+  var TextExpand = new Expand({
+    view: view,
+    expandIconClass: "esri-icon-description",
+      Title: "Map information",
+      expandTooltip: "Map information",
+        content: MapInfoContent
+//        content: "Test"
+    
+  });                    
         
         
 //        view.ui.empty("top-left");
@@ -149,6 +153,11 @@
           }),
           position:"top-left",
           index:0
+        },
+         {
+          component: TextExpand,
+          position:"top-left",
+          index:3
         }
           ]);
         
@@ -156,7 +165,10 @@
         view.ui.move([{
             component: "zoom",
             position: "top-left",
-            index: 2}]);
+            index: 1}]);
+        
+        
+        
         
         // When the layerview is available, setup hovering interactivity
         view.whenLayerView(layer).then(setupHoverTooltip);
@@ -572,4 +584,9 @@
       </div>
     </div>
   </body>
+<style> div[class="esri-expand__content esri-expand__content--expanded"]{
+ width: 500px;
+}
+</style>    
+
 </html>
