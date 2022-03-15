@@ -146,7 +146,11 @@
             constraints: {
               snapToZoom: false,
               resizeAlign: "top-left"
-            }
+            },
+	    navigation: {
+	      mouseWheelZoomEnabled: false,
+	      browserTouchPanEnabled: false
+	    }
           });
           
           var timeSlider = new TimeSlider({
