@@ -27,13 +27,14 @@
             "esri/views/MapView",
             "esri/layers/FeatureLayer",
             "esri/widgets/Legend",
+            "esri/widgets/LayerList",
             "esri/widgets/Zoom",
             "esri/widgets/Search",
             "esri/widgets/Home",
             "esri/widgets/Locate",
             "esri/widgets/Fullscreen",
             "esri/widgets/Expand"
-        ], function(WebMap, MapView, FeatureLayer, Legend, Zoom, Search, Home, Locate, Fullscreen, Expand) {
+        ], function(WebMap, MapView, FeatureLayer, Legend, LayerList, Zoom, Search, Home, Locate, Fullscreen, Expand) {
 
             const webmap = new WebMap({
                 portalItem: { // autocasts as new PortalItem()
@@ -85,7 +86,17 @@
             fullscreen = new Fullscreen({
                 view: view
             });
-			
+	
+            layerListWidget = new LayerList({
+                view: view
+            });
+  
+            layerList = new Expand({
+                expandIconClass: "esri-icon-layers",
+                view: view,
+                content: layerListWidget
+            });
+          
             view.ui.add([
 			{
 			component: legend,
@@ -95,24 +106,29 @@
 			{
 			component: home,
 			position: "top-left",
-			index: 1
+			index: 3
 			},
 			{
 			component: search,
 			position: "top-left",
-			index: 2
+			index: 4
 			},
 
 			{
 			component: locate,
 			position: "top-left",
-			index: 3
+			index: 5
 			},
 			{
 			component: fullscreen,
 			position: "top-left",
 			index: 0
-			}                
+			},
+			{
+			component: layerList,
+			position: "top-left",
+			index: 2
+			}                  
 			]);
 
         });
