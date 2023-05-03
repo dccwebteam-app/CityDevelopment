@@ -88,6 +88,7 @@
           "esri/Map",
           "esri/views/MapView",
           "esri/layers/FeatureLayer",
+          "esri/widgets/LayerList",
           "esri/widgets/Legend",
           "esri/widgets/Home",
           "esri/widgets/Expand",
@@ -100,6 +101,7 @@
           Map,
           MapView,
           FeatureLayer,
+          LayerList,
           Legend,
           Home,
           Expand,
@@ -111,21 +113,29 @@
         ) {
           //        let timeSlider;
           
-          var layer = new FeatureLayer({
+          var Consents_Layer = new FeatureLayer({
             portalItem: {
               id: "c791d98a63924082af7fcbd39c02bd3c"
-//              id: "40acc1e89e5648e78bcd4488ced0688f"
             },
-            title: "Consented homes"//,
-            //          effect: "bloom(0.5 0 0.5)"
+            title: "Consented homes",
           });
+          
+          var Constructed_Layer = new FeatureLayer({
+            portalItem: {
+              id: "306ed37f3c674f1384eb5863cd9bc123"
+            },
+            title: "Constructed homes",
+            visible: false
+          });
+          
+          
           var map = new Map({
             basemap: {
               portalItem: {
                 id: "4f2e99ba65e34bb8af49733d9778fb8e"
               }
             },
-            layers: [layer]
+            layers: [Consents_Layer, Constructed_Layer]
           });
           
           var view = new MapView({
@@ -161,8 +171,8 @@
             playRate: 200
           });
           
-                   view.whenLayerView(layer).then((lv) => {
-           timeSlider.fullTimeExtent = layer.timeInfo.fullTimeExtent.expandTo("months");
+                   view.whenLayerView(Consents_Layer).then((lv) => {
+           timeSlider.fullTimeExtent = Consents_Layer.timeInfo.fullTimeExtent.expandTo("months");
             timeSlider.stops = {
               interval: {
                 value: 1,
@@ -190,11 +200,23 @@
         const legend = new Legend({
 			view: view
 			});
-          
+            
         legendExpand = new Expand({
 			view: view,
 			expandIconClass: "esri-icon-legend",
 			content: legend,
+//      expanded: true,
+      expandTooltip: "Legend"
+			}); 
+          
+        const layerList = new LayerList({
+      view: view
+      });  
+          
+        layerListExpand = new Expand({
+			view: view,
+			expandIconClass: "esri-icon-layers",
+			content: layerList,
 //      expanded: true,
       expandTooltip: "Legend"
 			}); 
@@ -230,18 +252,22 @@
           }),
             position: "top-left",
 			index: 2},
+           {
+            component: layerListExpand,
+            position: "top-left",
+			index: 3},
           {
             component: legendExpand,
             position: "top-left",
-			index: 3},
+			index: 4},
                       {
             component:    basemapGalleryExpand,
             position: "top-left",
-			index: 4},
+			index: 5},
           {
             component:    TextExpand,
             position: "top-left",
-			index: 5} 
+			index: 6} 
                     ]
                 );  
 
