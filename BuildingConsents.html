@@ -173,6 +173,7 @@
           
                    view.whenLayerView(Consents_Layer).then((lv) => {
            timeSlider.fullTimeExtent = Consents_Layer.timeInfo.fullTimeExtent.expandTo("months");
+	   timeSlider.fullTimeExtent.start = new Date(2013, 0, 1);
             timeSlider.stops = {
               interval: {
                 value: 1,
