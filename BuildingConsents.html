@@ -95,7 +95,8 @@
           "esri/widgets/TimeSlider",
           "esri/core/watchUtils",
           "esri/core/promiseUtils",
-          "esri/widgets/BasemapGallery",
+          "esri/Basemap",
+          "esri/widgets/BasemapToggle",
           "esri/widgets/Fullscreen"
         ], function(
           Map,
@@ -108,7 +109,8 @@
           TimeSlider,
           watchUtils,
           promiseUtils,
-          BasemapGallery,
+          Basemap,
+          BasemapToggle,
            Fullscreen
         ) {
           //        let timeSlider;
@@ -186,18 +188,17 @@
             }
 			});
           
-        const basemapGallery = new BasemapGallery({
-			view: view,
-			container: "BasemapDiv"
-			});
+        let DCC_aerial_basemap = new Basemap({
+  portalItem: {
+    id: "28f49811a6974659988fd279de5ce39f"
+  }
+});
           
-        basemapGalleryExpand = new Expand({
+        const basemapToggle = new BasemapToggle({
 			view: view,
-			expandIconClass: "esri-icon-basemap",
-			content: basemapGallery,
-      expandTooltip: "Basemaps"           
-			}); 
-            
+  nextBasemap: DCC_aerial_basemap
+			});
+
         const legend = new Legend({
 			view: view
 			});
@@ -261,21 +262,23 @@
             component: legendExpand,
             position: "top-left",
 			index: 4},
-                      {
-            component:    basemapGalleryExpand,
-            position: "top-left",
-			index: 5},
           {
             component:    TextExpand,
             position: "top-left",
-			index: 6} 
+			index: 5} 
                     ]
                 );  
-
+                  
+          view.ui.add([{
+            component: basemapToggle,
+            position: "top-right",
+            index: 0}]);
+          
+          
           view.ui.add([{
             component: "titleDiv",
             position: "top-left",
-            index: 0}])
+            index: 0}]);
           
         view.ui.move([{
             component: "zoom",
